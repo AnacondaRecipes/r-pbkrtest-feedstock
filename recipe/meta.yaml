@@ -14,12 +14,20 @@ source:
     - https://cran.r-project.org/src/contrib/Archive/pbkrtest/pbkrtest_{{ version }}.tar.gz
   sha256: 5cbb03ad2b2468720a5a610a0ebda48ac08119a34fca77810a85f554225c23ea
 
+
+  # patches:
+   # List any patch files here
+   # - fix.patch
+
 build:
+  # If this is a new build for the same version, increment the build number.
   number: 0
-  skip: true  # [win32]
+
+  # This is required to make R link correctly on Linux.
   rpaths:
     - lib/R/lib/
     - lib/
+
 
 requirements:
   build:
@@ -27,6 +35,7 @@ requirements:
     - r-mass
     - r-matrix >=1.2.3
     - r-lme4 >=1.1.10
+
   run:
     - r-base
     - r-mass
@@ -35,8 +44,15 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('pbkrtest')"  # [not win]
+    # You can put additional test commands to be run here.
+    - $R -e "library('pbkrtest')"           # [not win]
     - "\"%R%\" -e \"library('pbkrtest')\""  # [win]
+
+  # You can also put a file called run_test.py, run_test.sh, or run_test.bat
+  # in the recipe that will be run at test time.
+
+  # requires:
+    # Put any additional test requirements here.
 
 about:
   home: http://people.math.aau.dk/~sorenh/software/pbkrtest/
@@ -51,3 +67,28 @@ extra:
   recipe-maintainers:
     - johanneskoester
     - bgruening
+    - mingwandroid
+
+# The original CRAN metadata for this package was:
+
+# Package: pbkrtest
+# Version: 0.4-7
+# Title: Parametric Bootstrap and Kenward Roger Based Methods for Mixed Model Comparison
+# Author: Ulrich Halekoh <uhalekoh@health.sdu.dk> Sren Hjsgaard <sorenh@math.aau.dk>
+# Maintainer: Sren Hjsgaard <sorenh@math.aau.dk>
+# Description: Test in mixed effects models. Attention is on mixed effects models as implemented in the 'lme4' package. This package implements a parametric bootstrap test and a Kenward Roger modification of F-tests for linear mixed effects models and a parametric bootstrap test for generalized linear mixed models.
+# URL: http://people.math.aau.dk/~sorenh/software/pbkrtest/
+# Depends: R (>= 3.2.3), lme4 (>= 1.1.10)
+# Imports: Matrix (>= 1.2.3), parallel, MASS, methods
+# Encoding: UTF-8
+# ZipData: no
+# License: GPL (>= 2)
+# RoxygenNote: 5.0.1
+# NeedsCompilation: no
+# Packaged: 2017-03-12 20:05:38 UTC; sorenh
+# Repository: CRAN
+# Date/Publication: 2017-03-15 08:49:25
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
