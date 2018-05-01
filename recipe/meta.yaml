@@ -14,22 +14,15 @@ source:
     - {{ cran_mirror }}/src/contrib/Archive/pbkrtest/pbkrtest_{{ version }}.tar.gz
   sha256: 5cbb03ad2b2468720a5a610a0ebda48ac08119a34fca77810a85f554225c23ea
 
-
-  # patches:
-   # List any patch files here
-   # - fix.patch
-
 build:
   merge_build_host: True  # [win]
   # If this is a new build for the same version, increment the build number.
   number: 0
 
-
   # This is required to make R link correctly on Linux.
   rpaths:
     - lib/R/lib/
     - lib/
-
 
 requirements:
   build:
